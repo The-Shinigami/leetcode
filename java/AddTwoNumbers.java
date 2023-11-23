@@ -31,37 +31,28 @@ It is guaranteed that the list represents a number that does not have leading ze
  */
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-
-        
-    
-        ListNode lastElement = new ListNode();
-        ListNode result = lastElement;
-        ListNode prevLastElement = lastElement;
+        ListNode head = new ListNode();
+        ListNode result = head;
         int rest = 0;
-
-
-        while( l1 != null  || l2 != null ){
-         
+        while(l1 != null || l2 != null)
+        {
          if(l2 == null){l2 = new ListNode(0);}
          if(l1== null){l1 = new ListNode(0);}
-        
-        lastElement.next = new ListNode();
-        lastElement.val = (l1.val + l2.val+rest) % 10 ; 
-    
-        rest = (l1.val + l2.val + rest)/10;
-        l1 =  l1.next ;
-        l2 =  l2.next ;
-        prevLastElement = lastElement;
-        lastElement = lastElement.next;
+         
+            int value =(l1.val+l2.val+rest) % 10;
+            head.next = new ListNode(value);
+            rest = (l1.val+l2.val+rest)/10;
+
+            l1 = l1.next;
+            l2 = l2.next;
+            head = head.next;
+
+        }
+        if (rest != 0){
+            head.next = new ListNode(rest);
         }
 
-        if(rest == 1) {prevLastElement.next.val = 1;}
-        else{prevLastElement.next = null;}  
-        
-         return result;
+        return result.next;
 
-        
     }
 }
-
-
